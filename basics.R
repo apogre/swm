@@ -13,11 +13,13 @@ data[data==0]<-1
 
 data$log_friends_count<-log(data$friends_count)
 data$log_followers_count<-log(data$followers_count)
+data$log_favourites_count<-log(data$favourites_count)
+data$log_statuses_count<-log(data$statuses_count)
 
 
 summary(data)
 
-log_data <- data.frame(data$log_friends_count,data$log_followers_count)
+log_data <- data.frame(data$log_friends_count,data$log_followers_count,data$log_statuses_count,data$log_favourites_count)
 
 wss <- (nrow(log_data)-1)*sum(apply(log_data,2,var))
 for (i in 2:15) wss[i] <- sum(kmeans(log_data,centers=i)$withinss)
